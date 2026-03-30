@@ -1,0 +1,67 @@
+﻿<project name="Grain-Bank" default="compile">
+
+    <!-- PATHS -->
+    <path id="jetty.cp">
+        <fileset dir="Jetty"/>
+    </path>
+
+    <path id="lib.cp">
+        <fileset dir="lib"/>
+        <path refid="jetty.cp"/>
+    </path>
+
+    <path id="dist.cp">
+        <path refid="lib.cp"/>
+        <pathelement location="dist/bank.jar"/>
+    </path>
+
+
+    <!-- INIT -->
+    <target name="init">
+        <mkdir dir="bin"/>
+        <mkdir dir="dist"/>
+    </target>
+
+
+    <!-- COPY -->
+    <target name="copy" depends="init">
+        <copy todir="bin">
+            <fileset dir="res"/>
+        </copy>
+    </target>
+
+
+    <!-- COMPILE -->
+    <target name="compile" depends="init,copy">
+        <javac srcdir="src" destdir="bin" includeantruntime="false">
+            <classpath refid="lib.cp"/>
+        </javac>
+    </target>
+
+
+    <!-- DIST -->
+    <target name="dist" depends="compile">
+        <jar destfile="dist/bank.jar">
+            <fileset dir="bin"/>
+        </jar>
+    </target>
+
+
+    <!-- RUN -->
+    <target name="run" depends="dist">
+        <java classname="put.io.selenium.atm.SimpleServer" classpathref="dist.cp" fork="true"/>
+    </target>
+
+
+    <!-- CLEAN -->
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+
+
+    <!-- CLEAN ALL -->
+    <target name="clean-all" depends="clean">
+        <delete dir="dist"/>
+    </target>
+
+</project>
