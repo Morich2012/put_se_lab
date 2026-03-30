@@ -18,3 +18,4 @@ jobs:
 
       - name: Build
         run: mvn verify
+        working-directory: 03-CI
