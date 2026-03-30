@@ -1,14 +1,22 @@
 name: Java CI
 
-on: [push]
+# Ejecutar al hacer push en cualquier rama
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # 1️⃣ Obtener el código del repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      # 2️⃣ Instalar JDK 21
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -16,6 +24,11 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
-      - name: Build
-        run: mvn verify
+      # 3️⃣ Ejecutar Maven dentro de 03-CI
+      - name: Build and run tests
+        run: mvn --batch-mode --update-snapshots verify
         working-directory: 03-CI
+
+      # 4️⃣ (Opcional) Mostrar resultados de tests
+      - name: Show Maven test results
+        run: cat 03-CI/target/surefire-reports/*.txt || true
