@@ -1,8 +1,7 @@
+// My first Java program
 public class Program {
     public static void main(String[] args) {
         System.out.println("Hello World");
-
-        System.out.println("New Feature");
 
         System.out.println("Change 1");   // cambio 1
 
