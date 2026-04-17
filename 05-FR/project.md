@@ -51,16 +51,12 @@ A person intending to purchase a product at an auction.
 
 [Seller](#ac1):
 * [UC1](#uc1): Offering a product at an auction
-* [UC7](#uc7): Register account
-* [UC8](#uc8): Log in
 
 [Buyer](#ac2):
 * [UC2](#uc2): Browsing available auctions
 * [UC3](#uc3): Placing a bid
 * [UC4](#uc4): Viewing auction result
 * [UC5](#uc5): Viewing auction details
-* [UC7](#uc7): Register account
-* [UC8](#uc8): Log in
 
 ---
 
@@ -164,51 +160,6 @@ A person intending to purchase a product at an auction.
 
 ---
 
-<a id="uc7"></a>
-### UC7: Register account
-
-**Actors:** [Seller](#ac1), [Buyer](#ac2)
-
-**Main scenario:**
-1. Actor selects the registration option.
-2. System requests user data (name, email address, password).
-3. Actor provides the required data.
-4. System validates the data.
-5. System confirms successful registration and grants access.
-
-**Alternative scenarios:**
-
-4.A. Invalid or incomplete data provided.
-* 4.A.1. System informs actor about incorrectly entered data.
-* 4.A.2. Continue at step 2.
-
-4.B. An account with the given email address already exists.
-* 4.B.1. System informs actor that the email is already registered.
-* 4.B.2. End of use case.
-
----
-
-<a id="uc8"></a>
-### UC8: Log in
-
-**Actors:** [Seller](#ac1), [Buyer](#ac2)
-
-**Main scenario:**
-1. Actor selects the login option.
-2. System requests credentials (email and password).
-3. Actor enters credentials.
-4. System verifies the credentials.
-5. System grants the actor access to their account.
-
-**Alternative scenarios:**
-
-4.A. Invalid credentials provided.
-* 4.A.1. System denies access.
-* 4.A.2. System informs actor about incorrect credentials.
-* 4.A.3. Continue at step 2.
-
----
-
 ## Business objects (also known as domain or IT objects)
 
 <a id="bo1"></a>
@@ -251,5 +202,3 @@ Auction is won by [Buyer](#ac2) who submitted the highest bid before the end of 
 | UC3: Placing a bid                    |       R       |       R       |     C     |
 | UC4: Viewing auction result           |      R/U      |       R       |     R     |
 | UC5: Viewing auction details          |       R       |       R       |     L     |
-| UC7: Register account                 |               |               |           |
-| UC8: Log in                           |               |               |           |
