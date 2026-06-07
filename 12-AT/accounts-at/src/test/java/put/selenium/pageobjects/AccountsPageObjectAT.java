@@ -44,7 +44,7 @@ public class AccountsPageObjectAT {
 
         this.hostURL=properties.getProperty("host.url");
 
-        System.setProperty("webdriver.chrome.driver", "chromedriver-win64-120.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver-win64-148.exe");
         this.driver = new ChromeDriver();
         this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 

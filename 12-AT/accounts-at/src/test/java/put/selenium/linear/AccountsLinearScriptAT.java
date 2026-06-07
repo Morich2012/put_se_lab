@@ -22,7 +22,7 @@ public class AccountsLinearScriptAT {
 
     @Before
     public void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "chromedriver-win64-120.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver-win64-148.exe");
         this.driver = new ChromeDriver();
         screenshotOnFailureAndWebDriverQuitRule.setWebDriver(driver);
         driver.get("http://localhost:8080/accounts/controller?action=db_reset");

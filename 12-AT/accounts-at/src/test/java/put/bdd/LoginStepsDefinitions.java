@@ -48,7 +48,7 @@ public class LoginStepsDefinitions {
 		this.hostURL=properties.getProperty("host.url");
 		//this.hostURL = "http://localhost:8080";
 
-		System.setProperty("webdriver.chrome.driver", "chromedriver-win64-120.exe");
+		System.setProperty("webdriver.chrome.driver", "chromedriver-win64-148.exe");
 		this.driver = new ChromeDriver();
 		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
