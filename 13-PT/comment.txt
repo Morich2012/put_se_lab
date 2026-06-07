@@ -1,0 +1,50 @@
+Task 1 - Customers and discount codes
+======================================
+
+a) Base code performance (original implementation):
+   Average response time: 10208 ms
+   Throughput: 0.6 requests/s
+
+b) Problem identified and fix applied:
+   The method averageSpendings() was called twice per iteration inside the
+   for-each loop in CustomerCardsController.get(). Since this method itself
+   iterates over all 10000 customers to compute the average, the overall
+   complexity was O(n^2) - for each of the 10000 customers, the average
+   was recomputed from scratch twice. This resulted in roughly 200 million
+   arithmetic operations per single HTTP request, causing the ~10 second
+   response times.
+
+   Fix: compute the average once before the loop and store it in a local
+   variable. This reduces the complexity to O(n), making the calculation
+   proportional to the number of customers rather than its square.
+
+After fix performance:
+   Average response time: 286 ms
+   Throughput: 1.6 requests/s
+
+----------------------------------------------------------------------
+
+Task 2 - Card printers
+======================================
+
+a) Checking analysts' assumptions (10 printers):
+   Average throughput measured: 2.0 requests/s = 120 cards/minute = 7200 cards/hour
+
+   The analysts' assumption of 20000 cards/hour is not achievable with 10 printers.
+   Each printer takes 5 seconds per card, so 10 printers can handle at most
+   10 / 5 = 2 cards/second = 120 cards/minute = 7200 cards/hour.
+   This is roughly 2.8 times less than the assumed 20000 cards/hour.
+
+b) Number of printers required:
+   Recommended number of printers: 30
+
+   The target throughput is 20000 cards/hour = ~334 cards/minute = ~5.56 cards/second.
+   With 5 seconds per print, the minimum number of printers is ceil(5.56 * 5) = 28.
+
+   Tests conducted:
+   - 10 printers: 2.0/s = 120 cards/min (far below target)
+   - 28 printers: 5.4/s = 324 cards/min (slightly below target)
+   - 30 printers: 5.8/s = 348 cards/min (exceeds target of 334 cards/min)
+
+   With 30 printers the system achieves 348 cards/minute (20880 cards/hour),
+   which exceeds the assumed 20000 cards/hour and provides a small safety margin.
